@@ -7,23 +7,46 @@ import random
 
 import time
 
-# Set the amount of time for the countdown (in seconds)
-countdown_time = 5
+# import necessary modules
+import pygame
 
-# Print the initial message
-print("The game will start in...")
+# initialize pygame
+pygame.init()
 
-# Use a while loop to countdown
-while countdown_time > 0:
-    # Print the current time left
-    print(countdown_time)
-    # Wait for one second
-    time.sleep(1)
-    # Decrement the countdown time
-    countdown_time -= 1
+# set up the display
+screen = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("Space Invaders")
 
-# Print a message when the countdown is finished
-print("GO!")
+# create a font for the scoreboard
+font = pygame.font.Font(None, 30)
+
+# initialize the player's score
+score = 0
+
+# game loop
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    # update the score
+    score += 1
+
+    # render the score
+    score_text = font.render("Score: " + str(score), True, (255, 255, 255))
+
+    # clear the screen
+    screen.fill((0, 0, 0))
+
+    # draw the score on the screen
+    screen.blit(score_text, (650, 550))
+
+    # update the display
+    pygame.display.update()
+
+# quit pygame
+pygame.quit()
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
 mixer.init()
